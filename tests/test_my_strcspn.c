@@ -21,7 +21,7 @@ Test(strcspn, test1)
     write(2, "./libasm.so: Not found\n", 23);
         return;
     }
-    
+
     my_strcspn = dlsym(handle, "strcspn");
 
 	cr_assert(my_strcspn(str, "t") == strcspn(str, "t"));

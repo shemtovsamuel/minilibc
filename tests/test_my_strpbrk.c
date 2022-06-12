@@ -51,17 +51,3 @@ Test(strpbrk, test2)
 	cr_assert(my_strpbrk("full stack", "full stack") == strpbrk("full stack", "full stack"));
 	cr_assert(my_strpbrk("aze", "toto") == strpbrk("aze", "toto"));
 }
-
-Test(strpbrk, test3)
-{
-    void *handle = dlopen("./libasm.so", RTLD_LAZY);
-    char *str = "full stack";
-
-    if (!handle) {
-    write(2, "./libasm.so: Not found\n", 23);
-        return;
-    }
-    my_strpbrk = dlsym(handle, "strpbrk");
-
-    cr_assert(my_strpbrk(str, str) == strpbrk(str, str));
-}

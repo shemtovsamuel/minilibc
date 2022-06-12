@@ -41,18 +41,3 @@ Test(memcpy, test_memcpy2)
 
 	cr_assert(my_memcpy(str, str2, 5) == memcpy(str, str2, 5));
 }
-
-Test(memcpy, test_memcpy3)
-{
-    void *handle = dlopen("./libasm.so", RTLD_LAZY);
-    char *str = strdup("totototototototototo");
-	char *str2 = strdup("titi");
-
-    if (!handle) {
-    write(2, "./libasm.so: Not found\n", 23);
-        return;
-    }
-    my_memcpy = dlsym(handle, "memcpy");
-
-	cr_assert(my_memcpy(str, str2, 9) == memcpy(str, str2, 9));
-}

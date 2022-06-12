@@ -42,19 +42,3 @@ Test(strrchr, test2)
 
 	cr_assert(my_strrchr(str, 'A') == strrchr(str, 'A'));
 }
-
-Test(strrchr, test3)
-{
-    char	*str = "toto";
-    void *handle = dlopen("./libasm.so", RTLD_LAZY);
-
-    if (!handle) {
-    write(2, "./libasm.so: Not found\n", 23);
-        return;
-    }
-    my_strrchr = dlsym(handle, "strrchr");
-
-    cr_assert(my_strrchr(str, 't') == strrchr(str, 't'));
-    cr_assert(my_strrchr(str, 'x') == strrchr(str, 'x'));
-	cr_assert(my_strrchr(str, '\0') == strrchr(str, '\0'));
-}

@@ -35,29 +35,3 @@ Test(my_strcasecmp, test1)
     cr_assert(strcasecmp(str5, str3) == my_strcasecmp(str5, str3));
     cr_assert(strcasecmp(str2, str2) == my_strcasecmp(str2, str2));
 }
-
-Test(my_strcasecmp, test2)
-{
-    void *handle = dlopen("./libasm.so", RTLD_LAZY);
-    char *str1 = "BONJOUR";
-    char *str2 = "ONjour";
-    char *str3 = "iiiiiiiiiii";
-    char *str4 = "bonjour";
-    char *str5 = "bonjurazez";
-
-    if (!handle) {
-    write(2, "./libasm.so: Not found\n", 23);
-        return;
-    }
-    my_strcasecmp = dlsym(handle, "strcasecmp");
-
-    cr_assert(strcasecmp(str1, str2) == my_strcasecmp(str1, str2));
-    cr_assert(strcasecmp(str3, str4) == my_strcasecmp(str3, str4));
-    cr_assert(strcasecmp(str4, str2) == my_strcasecmp(str4, str2));
-    cr_assert(strcasecmp(str1, str3) == my_strcasecmp(str1, str3));
-    cr_assert(strcasecmp(str4, str1) == my_strcasecmp(str4, str1));
-    cr_assert(strcasecmp(str5, str3) == my_strcasecmp(str5, str3));
-    cr_assert(strcasecmp(str2, str2) == my_strcasecmp(str2, str2));
-    cr_assert(strcasecmp(str1, str4) == my_strcasecmp(str1, str4));
-    cr_assert(strcasecmp(str4, str1) == my_strcasecmp(str4, str1));
-}
